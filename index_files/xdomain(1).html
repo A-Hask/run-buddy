@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://questions.learnosity.com/v2021.3.lts/xdomain -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+</head>
+<body marginwidth="0" marginheight="0"><script>
+var isChromeApp = window.location.search.substr(1) === 'chromeApp',
+    appOrigin, appWindow;
+
+function isString(str) {
+    return Object.prototype.toString.call(str) == '[object String]';
+}
+
+function requestHandler(event) {
+    var myData, myXhr;
+
+    try {
+        myData = JSON.parse(event.data);
+    } catch (e) {
+        myData = {};
+    }
+    if (isString(myData.method) && isString(myData.url)) {
+        myData.method = myData.method.toUpperCase();
+        if (myData.method == 'POST' || myData.method == 'GET' || myData.method == 'PUT' || myData.method == 'DELETE') {
+            myXhr = new XMLHttpRequest();
+            myXhr.open(myData.method, myData.url, true);
+            myXhr.timeout = 300000; // 5 minutes
+            if (myData.headers) {
+                for (var key in myData.headers) {
+                    if (myData.headers.hasOwnProperty(key)) {
+                        myXhr.setRequestHeader(key, myData.headers[key]);
+                    }
+                }
+            }
+            myXhr.onreadystatechange = function () {
+                if (myXhr.readyState !== 4) { return; } //DONE?
+                sendMessage({
+                    status: myXhr.status,
+                    responseText: myXhr.responseText,
+                    headers: myXhr.getAllResponseHeaders(),
+                    id: myData.requestId
+                });
+            };
+            myXhr.send(myData.data);
+            return;
+        }
+    }
+    sendMessage({
+        error: 'Received message on x-origin-frame iframe with wrong data',
+        data: event.data
+    });
+}
+
+function receiveHanshake(event) {
+    // First message: store appWindow and appOrigin
+    if (!appWindow || !appOrigin) {
+        appWindow = event.source;
+        appOrigin = event.origin;
+    }
+    removeEventListener('message', receiveHanshake);
+    addEventListener('message', requestHandler);
+    sendMessage({ ready: true });
+}
+
+function sendMessage(data) {
+    if (appWindow && appWindow !== window) {
+        appWindow.postMessage(JSON.stringify(data), appOrigin);
+    } else {
+        console.error(
+            'Learnosity xdomain error. Couldn\'t find parent window. ' +
+            'This page has to be run as an iframe or webview.'
+        );
+    }
+}
+
+if (isChromeApp) {
+    addEventListener('message', receiveHanshake);
+} else {
+    appWindow = window.parent;
+    appOrigin = '*';
+    addEventListener('message', requestHandler);
+    sendMessage({ ready: true });
+}
+</script>
+
+</body></html>
