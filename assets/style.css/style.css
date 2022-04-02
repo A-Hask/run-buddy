@@ -205,9 +205,10 @@ section {
 /*REACH OUT STYLES BEGIN*/
 .contact {
     background-color: #024e76;
+    text-align: center;
 }
 
-.contact h2{
+.contact h2 {
     color: #fce138;
 }
 
@@ -228,7 +229,8 @@ section {
     color: #fce138;
     font-size: 32px;
 }
-.contact-info p, .contact-info address {
+.contact-info p,
+.contact-info address {
     margin: 20px 0;
     line-height: 1.5;
     font-size: 20px;
@@ -237,4 +239,5 @@ section {
 .contact-info a {
     color:#fce138;
 }
+
 /*REACH OUT STYLES END*/
