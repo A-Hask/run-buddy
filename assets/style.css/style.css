@@ -172,7 +172,7 @@ section {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: var(--secondary-color));
+    background: var(--secondary-color);
     position: absolute;
     left: -29px;
     top: -3px;
