@@ -13,6 +13,14 @@ header {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-image: url("../images/hero-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-position: 80%;
 }
 header h1 {
     font-weight: bold;
@@ -40,6 +48,15 @@ header nav ul li a {
     font-weight: lighter;
     font-size: 1.55vw;
 }
+
+header nav ul li a:hover {
+    background: #fce138;
+    color: #024e76;
+    border-radius: 15px;
+    text-shadow: none;
+}
+
+
 footer {
     background: #fce138;
     width: 100%;
@@ -63,11 +80,14 @@ footer a {
 section {
     padding: 60px;
 }
+
 /*Hero Style Start*/
 .hero {
     background-image: url("../images/hero-bg.jpg");
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
+    background-position: 80%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -94,14 +114,21 @@ section {
     background-color: #024e76;
     padding: 10px 20px;
     font-size: 16px;
+    border-radius: 10px;
+}
+
+.hero-form button:hover {
+    background-color: #39a6b2;
 }
 
 .hero-form {
-    background-color: #fce138;
+    background-color: rgba(252, 225, 56, 0.8);
     padding: 20px;
     color: #024e76;
     width: 40%;
     margin: 3.5%;
+    border: 5px solid #024e76;
+    border-radius: 15px;
 }
 .hero-form h3 {
     font-size: 24px;
@@ -112,12 +139,19 @@ section {
 }
 .form-input {
     border: 1px solid #024e76;
+    border-radius: 10px;
     display: block;
     padding: 7px 15px;
     font-size: 16px;
     color: #024e76;
     width: 100%;
     margin-bottom: 15px;
+    background-color: rgba (255,255,255, 0.75);
+}
+
+.form-input:focus {
+    background-color: rgba (255,255,255, 1);
+    outline: none;
 }
 .hero-form label {
     margin: 0 5px;
@@ -158,11 +192,15 @@ section {
     margin: 50px auto;
     padding-bottom: 50px;
     width: 80%;
-    border-bottom: 1px solid #39a6b2;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 1px solid #39a6b2;
+}
+
+.step:last-child {
+    border-bottom: 1px solid #39a6b2;
 }
 
 .step h3 {
@@ -288,6 +326,7 @@ section {
 .contact-form input,
 .contact-form textarea {
     border: 1px solid #024e76;
+    border-radius: 10px;
     display: block;
     padding: 7px 15px;
     font-size: 16px;
@@ -300,11 +339,17 @@ section {
 .contact-form button {
     width: 100%;
     border: none;
+    border-radius: 10px;
     background: #fce138;
     color: #024e76;
     text-align: center;
     padding: 15px 0;
     font-size: 16px;
+}
+
+.contact-form button:hover {
+    color: #fce138;
+    background: #39a6b2;
 }
 
 /*REACH OUT STYLES END*/
@@ -318,11 +363,13 @@ section {
     header {
         padding-bottom: 0;
         justify-content: center;
+        position: relative;
     }
 
     header h1 {
         width: 100%;
         text-align: center;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
 
     header nav ul {
@@ -333,6 +380,7 @@ section {
 
     header nav ul li a {
         font-size: 20px;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
 
     footer h2, footer div {
@@ -340,12 +388,18 @@ section {
         width: 100%;
     }
 
-    .hero-cta, .hero-form {
+    .hero-form {
         width: 100%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
 
     .hero-cta {
         text-align: center;
+        width: 100%;
+    }
+
+    .hero-cta h2 {
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
 
     .section-title {
